@@ -9,10 +9,62 @@
     
     
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-white text-gray-800">
 
-    <header class="p-4 bg-white shadow-md">
-        <h1 class="text-3xl font-bold text-gray-800"> WorkSphere</h1>
+    <header class="p-4 bg-red-200 shadow-md">
+        <h1 class=" flex items-center justify-center text-3xl font-bold text-gray-800"> WorkSphere</h1>
     </header>
 
-     
+     <main class="p-5 h-[90vh] grid gap-5 grid-cols-1 md:grid-cols-4 lg:grid-cols-5  ">
+        
+        <aside class=" bg-white p-5 rounded-xl shadow-lg md:col-span-1 overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700"> Staff Non Assigné</h2>
+            
+            <button  class="w-full py-2 mb-4 text-black font-bold rounded-lg bg-ws-green  bg-green-500">
+                + Ajouter Nouvel Employé
+            </button>
+            
+             
+        </aside>
+
+        <section class="md:col-span-3 lg:col-span-4 xl:col-span-5 bg-white p-5 rounded-xl shadow-lg overflow-y-auto ">
+            <h2 class="text-xl font-semibold mb-6 text-gray-700"> Plan d'Étage</h2>
+            
+            <div class="  grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  ">
+                
+                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative  bg-green-100 "  >
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Réception</h3>
+                 <button class=" absolute top-3 right-3 w-8 h-8 flex items-center justify-center  text-black rounded-full text-xl bg-blue-500 ">+</button>
+                 </div>
+                
+                <div class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-green-100 ">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle de conférence</h3>
+                <button class=" absolute top-3 right-3 w-8 h-8 items-center justify-center  text-black rounded-full text-xl bg-blue-500">+</button>
+                </div>
+                
+                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50 ">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle des serveurs</h3>
+                <button class=" absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
+                </div>
+                
+                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle de sécurité</h3>
+                <button class="  absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
+                </div>
+                
+                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle du personnel</h3>
+                <button class="  absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
+                </div>
+                
+                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
+                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle d'archives</h3>
+                <button class=" absolute top-3 right-3  w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    
