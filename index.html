@@ -5,134 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkSphere - Gestion du Personnel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-     
-    
     
 </head>
-<body class="bg-white text-gray-800">
+ <body class="bg-gray-100">
 
-    <header class="p-4 bg-red-200 shadow-md">
-        <h1 class="flex items-center justify-center text-3xl font-bold text-gray-800"> WorkSphere</h1>
-    </header>
-
-     <main class="p-5 h-[90vh] grid gap-5 grid-cols-1 md:grid-cols-4 lg:grid-cols-5  ">
-        
-        <aside class=" bg-white p-5 rounded-xl shadow-lg md:col-span-1 overflow-y-auto">
-            <h2 class="text-xl font-semibold mb-4 text-gray-700"> Staff Non Assigné</h2>
-            
-            <button  class="w-full py-2 mb-4 text-black font-bold rounded-lg bg-ws-green  bg-green-500">
-                + Ajouter Nouvel Employé
-            </button>
-            
-             
-        </aside>
-
-        <section class="md:col-span-3 lg:col-span-4 xl:col-span-5 bg-white p-5 rounded-xl shadow-lg overflow-y-auto ">
-            <h2 class="text-xl font-semibold mb-6 text-gray-700"> Plan d'Étage</h2>
-            
-            <div class="  grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  ">
-                
-                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative  bg-green-100 "  >
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Réception</h3>
-                 <button class=" absolute top-3 right-3 w-8 h-8 flex items-center justify-center  text-black rounded-full text-xl bg-blue-500 ">+</button>
-                 </div>
-                
-                <div class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-green-100 ">
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle de conférence</h3>
-                <button class=" absolute top-3 right-3 w-8 h-8 items-center justify-center  text-black rounded-full text-xl bg-blue-500">+</button>
-                </div>
-                
-                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50 ">
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle des serveurs</h3>
-                <button class=" absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
-                </div>
-                
-                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle de sécurité</h3>
-                <button class="  absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
-                </div>
-                
-                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle du personnel</h3>
-                <button class="  absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
-                </div>
-                
-                <div  class=" min-h-[180px] border-2 border-gray-300 rounded-xl p-4 relative bg-red-50">
-                <h3 class="text-lg font-bold mb-2 text-gray-800">Salle d'archives</h3>
-                <button class=" absolute top-3 right-3  w-8 h-8 flex items-center justify-center text-black rounded-full text-xl bg-blue-500 ">+</button>
-                </div>
-                
-            </div>
-        </section>
-
-    </main>
-        <div class=" fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="modal-content bg-white p-6 rounded-xl shadow-2xl w-full max-w-xl relative">
-            
-            <button class="absolute top-3 right-3 text-gray-500 text-3xl hover:text-gray-900 transition duration-150">&times;</button>
-            
-            <h3 class="text-2xl font-semibold mb-6 border-b pb-2">Ajouter un nouvel employé</h3>
-            
-            <form  class="space-y-4">
-                
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="form-group">
-                        <label for="nom" class="block text-sm font-medium text-gray-700">Nom :</label>
-                        <input type="text" id="nom" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-ws-green focus:border-ws-green">
-                    </div>
-                    <div>
-                        <label  class="block text-sm font-medium text-gray-700">Rôle :</label>
-                        <select  required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-ws-green focus:border-ws-green">
-                            <option>Manager</option>
-                            <option>Réceptionniste</option>
-                            <option>Technicien IT</option>
-                            <option>Agent de sécurité</option>
-                            <option>Nettoyage</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <div class="form-group">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email :</label>
-                        <input type="email" id="email" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-ws-green focus:border-ws-green">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Téléphone :</label>
-                        <input type="tel"   class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-ws-green focus:border-ws-green">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="photo-url" class="block text-sm font-medium text-gray-700">Photo (URL) :</label>
-                    <input type="url"   class="mt-1 block w-full border border-gray-300 rounded-lg p-2 focus:ring-ws-green focus:border-ws-green">
-                    <div id="photo-preview" class="mt-2 w-20 h-20 bg-gray-200 rounded-full border border-gray-300 flex items-center justify-center text-xs text-gray-500">
-                        Aperçu
-                    </div>
-                </div>
-                
-                <div class="exp-section border-t pt-4">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Expériences professionnelles :</label>
-                    <div   class="space-y-3">
-                        <div class="flex space-x-2">
-                             <input type="text" placeholder="Poste (ex: Développeur)" class="w-2/5 border border-gray-300 rounded-lg p-2">
-                             <input type="text" placeholder="Entreprise" class="w-2/5 border border-gray-300 rounded-lg p-2">
-                             <button   class="w-1/5 bg-ws-red text-white rounded-lg hover:bg-red-600 transition duration-150">X</button>
-                        </div>
-                    </div>
-                    <button   class="mt-3 py-1 px-3 bg-ws-orange text-white rounded-lg hover:bg-yellow-600 transition duration-150 text-sm">
-                        + Ajouter une expérience
-                    </button>
-                </div>
-
-                <button  class="w-full py-3 text-white font-bold rounded-lg bg-red-500 mt-6">
-                    Créer l'Employé
-                </button>
-            </form>
-        </div>
-    </div>
-</body>
-</html>
+  <div class="flex flex-col md:flex-row min-h-screen">
 
     
+    <aside class="bg-white md:w-72 p-4 border-b md:border-b-0 md:border-r border-gray-200">
+      <h2 class="text-lg font-semibold mb-3">Unassigned Staff</h2>
+
+      
+      <button id="openForm"
+              class="w-full bg-green-600 text-white py-2 rounded-none mb-4 text-sm">
+        Add New Worker
+      </button>
+
+      <ul class="space-y-2 text-sm">
+        
+        <li class="flex items-center bg-gray-50 border border-gray-200 rounded-none p-2">
+          <div class="w-8 h-8 bg-blue-600 text-white flex items-center justify-center mr-2 text-xs">A</div>
+          <div>
+            <p class="font-semibold">Alex</p>
+            <p class="text-gray-500 text-xs">Réceptionniste</p>
+          </div>
+        </li>
+        <li class="flex items-center bg-gray-50 border border-gray-200 rounded-none p-2">
+          <div class="w-8 h-8 bg-blue-600 text-white flex items-center justify-center mr-2 text-xs">B</div>
+          <div>
+            <p class="font-semibold">Bob</p>
+            <p class="text-gray-500 text-xs">Technicien IT</p>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+     <main class="flex-1 flex items-center justify-center p-4">
+      <div class="w-full max-w-3xl bg-cyan-100 border-2 border-gray-600 p-3">
+
+         <div class="grid grid-cols-2 gap-2 mb-4 h-56">
+          <div class="grid grid-rows-2 gap-2">
+            <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle de conférence</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+
+            <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle d'archives</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+          </div>
+
+          <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+            <div class="flex justify-center mb-1">
+              <h3 class="font-semibold text-[12px]">Salle du personnel</h3>
+            </div>
+            <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+              <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+            </div>
+          </section>
+        </div>
+
+         <div class="grid grid-cols-2 gap-2 h-56">
+          <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+            <div class="flex justify-center mb-1">
+              <h3 class="font-semibold text-[12px]">Réception</h3>
+            </div>
+            <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+              <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+            </div>
+          </section>
+
+          <div class="grid grid-cols-2 gap-2">
+            <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle de sécurité</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+
+            <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle des serveurs</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+   <div id="formOverlay"
+       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-lg border border-gray-400 rounded-none p-4 max-h-[90vh] overflow-y-auto">
+
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-base font-semibold">Ajouter un nouvel employé</h2>
+        <button id="closeForm" class="text-gray-500 text-xl leading-none">&times;</button>
+      </div>
+
+      <form id="workerForm" class="space-y-3 text-sm">
+         <div>
+          <label class="block mb-1 text-xs">Nom</label>
+          <input type="text" id="name" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Rôle</label>
+          <select id="role" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+            <option>Réceptionniste</option>
+            <option>Technicien IT</option>
+            <option>Agent de sécurité</option>
+            <option>Manager</option>
+            <option>Nettoyage</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+         <div class="grid grid-cols-2 gap-2 items-start">
+          <div>
+            <label class="block mb-1 text-xs">Photo (URL)</label>
+            <input type="text" id="photoUrl" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+          </div>
+          <div class="flex flex-col items-center">
+            <span class="block mb-1 text-xs">Prévisualisation</span>
+            <img id="photoPreview" src="" alt="Preview"
+                 class="w-20 h-20 border border-gray-300 object-cover bg-gray-100">
+          </div>
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Email</label>
+          <input type="email" id="email" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Téléphone</label>
+          <input type="tel" id="phone" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs">Expériences professionnelles</label>
+            <button type="button" id="addExperience"
+                    class="border border-gray-400 px-2 py-[2px] text-[11px]">
+              + Ajouter
+            </button>
+          </div>
+
+          <div id="experiences" class="space-y-2 text-xs">
+             <div class="border border-gray-300 p-2">
+              <input type="text" placeholder="Poste"
+                     class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+              <input type="text" placeholder="Entreprise"
+                     class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+              <input type="text" placeholder="Dates"
+                     class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+              <textarea placeholder="Description"
+                        class="w-full border border-gray-300 px-1 py-[2px] text-[11px]"></textarea>
+            </div>
+          </div>
+        </div>
+
+         <div class="flex justify-end space-x-2 mt-4 text-xs">
+          <button type="button" id="cancelForm"
+                  class="border border-gray-400 px-3 py-1">
+            Annuler
+          </button>
+          <button type="submit"
+                  class="bg-green-600 text-white px-3 py-1">
+            Sauvegarder
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+</html>
+ 
