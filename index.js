@@ -55,29 +55,25 @@
       expcontainer.appendChild(block);
     });
  
-     formOverlay.addEventListener('click', (e) => {
-      if (e.target === formOverlay) {
-        closeform();
-      }
-    });
-
-
- workerform.addEventListener('submit', (e) => {
+     workerform.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Récupérer le nom et le rôle
+  // Récupérer les valeurs
   const name = document.getElementById('name').value.trim();
   const role = document.getElementById('role').value.trim();
+  const photo = photourlinput.value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
 
-  if (!name || !role) return; // ne rien faire si vide
+  if (!name || !role) return;
 
   // Créer un div pour le nouvel employé
   const staffContainer = document.querySelector('aside .space-y-2');
   const workerDiv = document.createElement('div');
-  workerDiv.className = 'flex items-center bg-gray-50 border border-gray-200 rounded-none p-2';
+  workerDiv.className = 'flex items-center bg-gray-50 border border-gray-200 rounded-none p-2 hover:bg-gray-100 cursor-pointer';
   workerDiv.innerHTML = `
     <div class="w-8 h-8 bg-blue-600 text-white flex items-center justify-center mr-2 text-xs">
-      ${name.charAt(0).toUpperCase()}
+      ${photo ? `<img src="${photo}" class="w-full h-full object-cover">` : name.charAt(0).toUpperCase()}
     </div>
     <div>
       <p class="font-semibold">${name}</p>
@@ -92,4 +88,35 @@
   formOverlay.classList.add('hidden');
   workerform.reset();
   photopreview.src = '';
+
+  // Ajouter click pour afficher la card
+  workerDiv.addEventListener('click', () => {
+    const oldCard = document.getElementById('workerCard');
+    if (oldCard) oldCard.remove();
+
+    const card = document.createElement('div');
+    card.id = 'workerCard';
+    card.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-300 p-4 rounded shadow-lg z-50 w-72';
+    card.innerHTML = `
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="font-bold text-sm">${name}</h3>
+        <button id="closeCard" class="text-gray-500 text-lg">&times;</button>
+      </div>
+      <div class="flex mb-2">
+        <div class="w-16 h-16 bg-blue-600 rounded-full overflow-hidden mr-3">
+          ${photo ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover">` : name.charAt(0).toUpperCase()}
+        </div>
+        <div class="text-xs">
+          <p><strong>Rôle:</strong> ${role}</p>
+          <p><strong>Email:</strong> ${email || '-'}</p>
+          <p><strong>Téléphone:</strong> ${phone || '-'}</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(card);
+
+    document.getElementById('closeCard').addEventListener('click', () => {
+      card.remove();
+    });
+  });
 });
