@@ -1,4 +1,4 @@
- const formOverlay   = document.getElementById('formOverlay');
+    const formOverlay   = document.getElementById('formOverlay');
     const openformbtn   = document.getElementById('openform');
     const closeformbtn  = document.getElementById('closeform');
     const cancelformbtn = document.getElementById('cancelform');
@@ -103,7 +103,7 @@
         <button id="closeCard" class="text-gray-500 text-lg">&times;</button>
       </div>
       <div class="flex mb-2">
-        <div class="w-16 h-16 bg-blue-600 rounded-full overflow-hidden mr-3">
+        <div class="w-8 h-8 bg-blue-600 rounded-none overflow-hidden mr-3">
           ${photo ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover">` : name.charAt(0).toUpperCase()}
         </div>
         <div class="text-xs">
@@ -118,5 +118,100 @@
     document.getElementById('closeCard').addEventListener('click', () => {
       card.remove();
     });
+  });
+});
+  
+   const rules = {
+  "Réceptionniste": ["Réception", "Salle de conférence", "Salle du personnel"],
+  "Technicien IT": ["Salle des serveurs", "Salle de conférence", "Salle du personnel"],
+  "Agent de sécurité": ["Salle de sécurité", "Salle de conférence", "Salle du personnel"],
+  "Manager": ["Réception", "Salle des serveurs", "Salle de sécurité", "Salle du personnel", "Salle d'archives", "Salle de conférence"],
+  "Nettoyage": ["Réception", "Salle des serveurs", "Salle de sécurité", "Salle du personnel", "Salle de conférence"],
+  "Autre": ["Réception", "Salle des serveurs", "Salle de sécurité", "Salle du personnel", "Salle de conférence"]
+};
+
+const maxPerRoom = {
+  "Réception": 2,
+  "Salle des serveurs": 2,
+  "Salle de sécurité": 2,
+  "Salle du personnel": 3,
+  "Salle d'archives": 1,
+  "Salle de conférence": 5
+};
+
+ const workerLocations = {};
+
+document.querySelectorAll('section button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const section = btn.closest('section');
+    const salle = section.querySelector('h3').innerText;
+
+     const currentCount = section.querySelectorAll('.worker-card').length;
+    if (currentCount >= (maxPerRoom[salle] || 5)) {
+      return alert("Nombre maximum d'employés atteint pour cette salle");
+    }
+
+    const staffList = document.querySelector('aside .space-y-2');
+    const eligible = Array.from(staffList.children).filter(worker => {
+      const role = worker.querySelector('p:nth-child(2)').innerText;
+      return rules[role] && rules[role].includes(salle);
+    });
+
+    if (!eligible.length) return alert("Aucun employé disponible pour cette salle");
+
+     const popup = document.createElement('div');
+    popup.className = 'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border p-3 shadow-lg z-50';
+    popup.innerHTML = `<h3 class="font-semibold mb-2 text-sm">Choisir un employé</h3>`;
+
+    eligible.forEach(worker => {
+      const clone = worker.cloneNode(true);
+      clone.style.cursor = 'pointer';
+      clone.style.marginBottom = '4px';
+      clone.addEventListener('click', () => {
+
+        
+        const prevRoomId = workerLocations[worker.querySelector('p:nth-child(1)').innerText];
+        if (prevRoomId) {
+          const prevRoom = document.getElementById(prevRoomId);
+          const prevCard = Array.from(prevRoom.querySelectorAll('.worker-card')).find(c => c.dataset.name === worker.querySelector('p:nth-child(1)').innerText);
+          if (prevCard) prevCard.remove();
+        }
+
+          
+        const workerCard = document.createElement('div');
+        workerCard.className = 'worker-card flex items-center bg-gray-200 text-[10px] p-1 m-1 rounded cursor-pointer';
+        workerCard.dataset.name = worker.querySelector('p:nth-child(1)').innerText;
+        workerCard.innerHTML = `
+          <div class="w-6 h-6 bg-blue-600 text-white flex items-center justify-center mr-1 text-[8px]">
+            ${workerCard.dataset.name.charAt(0).toUpperCase()}
+          </div>
+          <span>${workerCard.dataset.name}</span>
+        `;
+
+         const removeBtn = document.createElement('button');
+        removeBtn.innerText = '×';
+        removeBtn.className = 'ml-1 text-red-500 text-xs';
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          workerCard.remove();
+          workerLocations[workerCard.dataset.name] = null;
+        });
+        workerCard.appendChild(removeBtn);
+
+        section.appendChild(workerCard);
+        workerLocations[workerCard.dataset.name] = section.id;
+
+        popup.remove();
+      });
+      popup.appendChild(clone);
+    });
+
+    const closeBtn = document.createElement('button');
+    closeBtn.innerText = 'Annuler';
+    closeBtn.className = 'mt-2 bg-gray-200 px-2 py-1 text-xs';
+    closeBtn.addEventListener('click', () => popup.remove());
+    popup.appendChild(closeBtn);
+
+    document.body.appendChild(popup);
   });
 });
