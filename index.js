@@ -80,13 +80,13 @@
       <p class="text-gray-500 text-xs">${role}</p>
     </div>
   `;
-  // بعد إنشاء div الموظف (workerDiv)
+   
 const removeBtn = document.createElement('button');
 removeBtn.textContent = 'X';
 removeBtn.className = 'ml-auto text-red-600 text-xs';
 removeBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // لمنع فتح البطاقة عند الضغط على X
-    workerDiv.remove();  // يحذف الموظف من القائمة
+    e.stopPropagation(); 
+    workerDiv.remove();  
 });
 
 workerDiv.appendChild(removeBtn);
@@ -132,3 +132,6 @@ workerDiv.appendChild(removeBtn);
 });
   
   
+
+
+ 
