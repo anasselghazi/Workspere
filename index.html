@@ -45,12 +45,12 @@
 
          <div id="conference" class="grid grid-cols-2 gap-2 mb-4 h-56">
           <div class="grid grid-rows-2 gap-2">
-            <section class="relative bg-red-100  border border-gray-500 rounded-none p-2 text-xs">
+            <section  id="conference" class= "relative bg-red-100  border border-gray-500 rounded-none p-2 text-xs">
               <div class="flex justify-center mb-1">
                 <h3 class="font-semibold text-[12px]">Salle de conférence</h3>
               </div>
               <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+                <button id="btnconf" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
               </div>
             </section>
 
@@ -59,7 +59,7 @@
                 <h3 class="font-semibold text-[12px]">Salle d'archives</h3>
               </div>
               <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+                <button id="btnarchive" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
               </div>
             </section>
           </div>
@@ -69,18 +69,18 @@
               <h3 class="font-semibold text-[12px]">Salle du personnel</h3>
             </div>
             <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-              <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              <button id="btnpersonnel" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
             </div>
           </section>
         </div>
 
-         <div id="Reception" class="grid grid-cols-2 gap-2 h-56">
+         <div id="reception" class="grid grid-cols-2 gap-2 h-56">
           <section class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
             <div class="flex justify-center mb-1">
               <h3 class="font-semibold text-[12px]">Réception</h3>
             </div>
             <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-              <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              <button  id="btnreception" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
             </div>
           </section>
 
@@ -90,7 +90,7 @@
                 <h3 class="font-semibold text-[12px]">Salle de sécurité</h3>
               </div>
               <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+                <button id="btnsecurit" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
               </div>
             </section>
 
@@ -99,7 +99,7 @@
                 <h3 class="font-semibold text-[12px]">Salle des serveurs</h3>
               </div>
               <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
-                <button class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+                <button id="btnservure" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
               </div>
             </section>
           </div>
@@ -114,7 +114,7 @@
        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
     <div class="bg-white w-full max-w-lg border border-gray-400 rounded-none p-4 max-h-[90vh] overflow-y-auto">
 
-      <div class="flex justify-between items-center mb-4">
+      <div class="flex justifyoye-between items-center mb-4">
         <h2 class="text-base font-semibold">Ajouter un nouvel employé</h2>
         <button id="closeform" class="text-gray-500 text-xl leading-none">&times;</button>
       </div>
@@ -128,12 +128,12 @@
          <div>
           <label class="block mb-1 text-xs">Rôle</label>
           <select id="role" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
-            <option>Réceptionniste</option>
-            <option>Technicien IT</option>
-            <option>Agent de sécurité</option>
-            <option>Manager</option>
-            <option>Nettoyage</option>
-            <option>Autre</option>
+            <option id="receptionniiste">Réceptionniste</option>
+            <option id="technicien">Technicien IT</option>
+            <option id="agent">Agent de sécurité</option>
+            <option id="manager">Manager</option>
+            <option id="nettoyage">Nettoyage</option>
+            <option id="autre">Autre</option>
           </select>
         </div>
 
@@ -178,11 +178,11 @@
     <input type="text" placeholder="Entreprise"
            class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
 
-    <label class="block mb-1 text-xs">Date début</label>
+    <label id="datdebout" class= "block mb-1 text-xs">Date début</label>
     <input type="date"
            class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
 
-    <label class="block mb-1 text-xs">Date fin</label>
+    <label id="datfin" class="block mb-1 text-xs">Date fin</label>
     <input type="date"
            class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
 
