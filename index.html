@@ -5,247 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkSphere - Gestion du Personnel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Smooth scrolling for internal lists */
-        #assign_container::-webkit-scrollbar, #staff-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        #assign_container::-webkit-scrollbar-thumb, #staff-list::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 4px;
-        }
-    </style>
+    
 </head>
-<body class="bg-slate-100 text-slate-700 h-screen overflow-hidden">
+ <body class="bg-gray-100">
+    <div id="assignOverlay" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden ">
+  <div class="bg-white w-full max-w-sm border border-gray-300 p-4 text-sm">
+    <h3 class="font-semibold mb-2 text-base">Sélectionner un employé</h3>
+    <div id="assign_container" class=" h-full overflow-y-auto  border-2 mb-2 flex flex-col">
 
-    <div id="assignOverlay" class="fixed inset-0 bg-slate-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity">
-        <div class="bg-white w-full max-w-sm rounded-xl shadow-2xl p-6 transform transition-all scale-100">
-            <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Sélectionner un employé</h3>
-            
-            <div id="assign_container" class="h-64 overflow-y-auto border border-slate-200 rounded-lg mb-4 flex flex-col bg-slate-50 p-2 space-y-1">
-                </div>
 
-            <div class="flex justify-end space-x-3 text-sm font-medium">
-                <button type="button" id="assignCancel" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-200 transition-colors">Annuler</button>
-                <button type="button" id="assignConfirm" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg shadow-md transition-colors">Assigner</button>
-            </div>
-        </div>
     </div>
+    <div class="flex justify-end space-x-2 text-xs">
+      <button type="button" id="assignCancel" class="border border-gray-400 px-3 py-1">Annuler</button>
+      <button type="button" id="assignConfirm" class="bg-green-600 text-white px-3 py-1">Assigner</button>
+    </div>
+  </div>
+</div>
 
-    <div class="flex flex-col md:flex-row h-screen">
+  <div class="flex flex-col md:flex-row max-h-screen">
 
-        <aside class="bg-white md:w-80 flex flex-col border-b md:border-b-0 md:border-r border-slate-200 shadow-xl z-20 h-full">
-            <div class="p-6 border-b border-slate-100">
-                <h1 class="text-xl font-bold text-emerald-700 flex items-center gap-2">
-                    <span>◆</span> WorkSphere
-                </h1>
-                <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">Dashboard RH</p>
-            </div>
 
-            <div class="flex-1 overflow-hidden flex flex-col p-4">
-                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Personnel Non Assigné</h2>
+    <aside class="bg-white md:w-72 p-4 h-full border-b md:border-b-0 md:border-r border-gray-200">
+      <h2 class="text-lg font-semibold mb-3">Unassigned Staff</h2>
+      <div id="staff-list" class="flex flex-col h-full w-full"></div>
+
+      <button id="openform"
+              class="w-full  bg-green-600 text-white py-2 rounded-none mb-6 text-sm">
+        Add New Worker
+      </button>
+
+      <div id="staff" class="space-y-2 text-sm">
+        
+        
+      </div>
+    </aside>
+
+     <main class="flex-1 flex items-center justify-center p-4">
+      <div class="w-full max-w-3xl bg-cyan-100 border-2 border-gray-600 p-3">
+
+         <div class="grid grid-cols-2 gap-2 mb-4 h-56">
+          <div class="grid grid-rows-2 gap-2">
+            <section  id="conference" class= "relative bg-red-100  border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle de conférence</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button id="btnconference" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none"  >+</button>
+              </div>
+            </section>
+
+            <section id="archives" class="relative  border border-gray-500 rounded-none p-2 text-xs bg-red-100">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle d'archives</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button id="btnarchive" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+              <div class="assign">
                 
-                <div id="staff-list" class="flex-1 overflow-y-auto space-y-2 pr-2">
-                    </div>
+              </div>
+            </section>
+
+          </div>
+
+          <section id="personnel" class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+            <div class="flex justify-center mb-1">
+              <h3 class="font-semibold text-[12px]">Salle du personnel</h3>
             </div>
-
-            <div class="p-4 bg-slate-50 border-t border-slate-200">
-                <button id="openform" class="w-full bg-slate-800 hover:bg-slate-900 text-white py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-95 text-sm font-medium flex items-center justify-center gap-2">
-                    <span class="text-lg leading-none">+</span> Add New Worker
-                </button>
+            <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+              <button id="btnpersonnel" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
             </div>
-
-            <div id="staff" class="hidden"></div>
-        </aside>
-
-        <main class="flex-1 flex flex-col relative overflow-hidden bg-slate-100">
-            <header class="bg-white h-16 border-b border-slate-200 flex items-center px-8 justify-between shadow-sm">
-                <h2 class="text-lg font-semibold text-slate-700">Plan des Bureaux</h2>
-                <div class="text-xs text-slate-400">Vue d'ensemble</div>
-            </header>
-
-            <div class="flex-1 p-8 overflow-auto flex items-center justify-center">
-                
-                <div class="w-full max-w-5xl aspect-video relative bg-white border border-slate-200 rounded-2xl shadow-sm p-6 grid grid-cols-2 gap-6">
-
-                    <div class="grid grid-rows-2 gap-6 h-full">
-                        
-                        <div class="grid grid-rows-2 gap-4 h-full">
-                            
-                            <section id="conference" class="relative group bg-indigo-50 border border-indigo-100 rounded-xl p-4 transition-all hover:shadow-md">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Conférence
-                                    </h3>
-                                </div>
-                                <div class="absolute bottom-3 right-3">
-                                    <button id="btnconference" class="bg-white text-indigo-600 border border-indigo-200 hover:bg-indigo-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                                </div>
-                            </section>
-
-                            <section id="archives" class="relative group bg-amber-50 border border-amber-100 rounded-xl p-4 transition-all hover:shadow-md flex flex-col">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-amber-500"></span> Archives
-                                    </h3>
-                                </div>
-                                <div class="assign flex-1 overflow-hidden">
-                                    </div>
-                                <div class="absolute bottom-3 right-3">
-                                    <button id="btnarchive" class="bg-white text-amber-600 border border-amber-200 hover:bg-amber-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                                </div>
-                            </section>
-                        </div>
-
-                        <section id="personnel" class="relative group bg-emerald-50 border border-emerald-100 rounded-xl p-4 transition-all hover:shadow-md">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Personnel / Break Room
-                                </h3>
-                            </div>
-                            <div class="absolute bottom-3 right-3">
-                                <button id="btnpersonnel" class="bg-white text-emerald-600 border border-emerald-200 hover:bg-emerald-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="grid grid-rows-2 gap-6 h-full">
-                        
-                        <section id="reception" class="relative group bg-slate-50 border border-slate-200 rounded-xl p-4 transition-all hover:shadow-md">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-bold text-slate-700 text-sm flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-slate-500"></span> Réception / Lobby
-                                </h3>
-                            </div>
-                            <div class="absolute bottom-3 right-3">
-                                <button id="btnreception" class="bg-white text-slate-600 border border-slate-200 hover:bg-slate-800 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                            </div>
-                        </section>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <section id="securite" class="relative group bg-rose-50 border border-rose-100 rounded-xl p-4 transition-all hover:shadow-md">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-rose-900 text-sm flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-rose-500"></span> Sécurité
-                                    </h3>
-                                </div>
-                                <div class="absolute bottom-3 right-3">
-                                    <button id="btnsecurit" class="bg-white text-rose-600 border border-rose-200 hover:bg-rose-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                                </div>
-                            </section>
-
-                            <section id="serveurs" class="relative group bg-blue-50 border border-blue-100 rounded-xl p-4 transition-all hover:shadow-md">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-blue-900 text-sm flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span> IT / Serveurs
-                                    </h3>
-                                </div>
-                                <div class="absolute bottom-3 right-3">
-                                    <button id="btnserveur" class="bg-white text-blue-600 border border-blue-200 hover:bg-blue-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm transition-all text-lg leading-none font-bold pb-1">+</button>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div id="formOverlay" class="fixed inset-0 bg-slate-900 bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity">
-        <div class="bg-white w-full max-w-lg rounded-xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
-            
-            <div class="flex justify-between items-center px-6 py-4 bg-slate-50 border-b border-slate-200">
-                <h2 class="text-lg font-bold text-slate-800">Ajouter un nouvel employé</h2>
-                <button id="closeform" class="text-slate-400 hover:text-red-500 text-2xl leading-none transition-colors">&times;</button>
-            </div>
-
-            <div class="p-6 overflow-y-auto custom-scrollbar">
-                <form id="workerform" class="space-y-4">
-                    
-                    <div>
-                        <label class="block mb-1 text-xs font-semibold text-slate-500 uppercase">Nom Complet</label>
-                        <input type="text" id="name" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-shadow" placeholder="Ex: Jean Dupont">
-                    </div>
-
-                    <div>
-                        <label class="block mb-1 text-xs font-semibold text-slate-500 uppercase">Rôle</label>
-                        <select id="role" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
-                            <option>Réceptionniste</option>
-                            <option>Technicien IT</option>
-                            <option>Agent de sécurité</option>
-                            <option>Manager</option>
-                            <option>Nettoyage</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
-
-                    <div class="grid grid-cols-[1fr_auto] gap-4 items-start">
-                        <div>
-                            <label class="block mb-1 text-xs font-semibold text-slate-500 uppercase">Photo (URL)</label>
-                            <input type="text" id="photourl" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="https://...">
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span class="block mb-1 text-[10px] text-slate-400 uppercase">Aperçu</span>
-                            <img id="photopreview" src="https://via.placeholder.com/150" alt="Preview" class="w-16 h-16 rounded-full border-2 border-slate-200 object-cover bg-slate-50">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block mb-1 text-xs font-semibold text-slate-500 uppercase">Email</label>
-                            <input type="email" id="email" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-xs font-semibold text-slate-500 uppercase">Téléphone</label>
-                            <input type="tel" id="phone" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                    </div>
-
-                    <div class="pt-2 border-t border-slate-100 mt-2">
-                        <div class="flex justify-between items-center mb-3">
-                            <label class="text-sm font-semibold text-slate-700">Expériences professionnelles</label>
-                            <button type="button" id="addexperience" class="text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-1 rounded text-xs font-bold transition-colors border border-emerald-200">
-                                + Ajouter
-                            </button>
-                        </div>
-
-                        <div id="experiences" class="space-y-3">
-                            <div class="border border-slate-200 rounded-lg p-3 bg-slate-50 hover:border-slate-300 transition-colors">
-                                <label class="block mb-1 text-[10px] font-bold text-slate-400 uppercase">Poste</label>
-                                <input type="text" placeholder="Intitulé du poste" class="w-full border border-slate-300 rounded px-2 py-1 mb-2 text-xs outline-none focus:border-emerald-500">
-
-                                <div class="grid grid-cols-2 gap-2 mb-2">
-                                    <div>
-                                        <label id="datedebut" class="block mb-1 text-[10px] font-bold text-slate-400 uppercase">Début</label>
-                                        <input type="date" class="w-full border border-slate-300 rounded px-2 py-1 text-xs text-slate-600 outline-none focus:border-emerald-500">
-                                    </div>
-                                    <div>
-                                        <label id="datefin" class="block mb-1 text-[10px] font-bold text-slate-400 uppercase">Fin</label>
-                                        <input type="date" class="w-full border border-slate-300 rounded px-2 py-1 text-xs text-slate-600 outline-none focus:border-emerald-500">
-                                    </div>
-                                </div>
-
-                                <label class="block mb-1 text-[10px] font-bold text-slate-400 uppercase">Description</label>
-                                <input placeholder="Courte description..." class="w-full border border-slate-300 rounded px-2 py-1 text-xs outline-none focus:border-emerald-500"> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-end space-x-3 pt-4 border-t border-slate-100">
-                        <button type="button" id="cancelform" class="px-5 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors text-sm font-medium">
-                            Annuler
-                        </button>
-                        <button type="submit" class="px-5 py-2 rounded-lg bg-emerald-600 text-white shadow hover:bg-emerald-700 hover:shadow-md transition-all text-sm font-medium">
-                            Sauvegarder
-                        </button>
-                    </div>
-                </form>
-            </div>
+          </section>
         </div>
+
+         <div  class="grid grid-cols-2 gap-2 h-56">
+
+
+          <section id="reception" class="relative bg-white border border-gray-500 rounded-none p-2 text-xs">
+            <div class="flex justify-center mb-1">
+              <h3 class="font-semibold text-[12px]">Réception</h3>
+            </div>
+            <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+              <button  id="btnreception" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+            </div>
+          </section>
+
+          <div  class="grid grid-cols-2 gap-2">
+            <section id="securite" class="relative bg-red-100 border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle de sécurité</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button id="btnsecurit" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+
+            <section id="serveurs" class="relative bg-red-100 border border-gray-500 rounded-none p-2 text-xs">
+              <div class="flex justify-center mb-1">
+                <h3 class="font-semibold text-[12px]">Salle des serveurs</h3>
+              </div>
+              <div class="absolute bottom-1 left-1/2 -translate-x-1/2">
+                <button id="btnserveur" class="bg-green-600 text-white text-[11px] px-3 py-[2px] rounded-none">+</button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+   <div id="formOverlay"
+       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-lg border border-gray-400 rounded-none p-4 max-h-[90vh] overflow-y-auto">
+
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-base font-semibold">Ajouter un nouvel employé</h2>
+        <button id="closeform" class="text-gray-500 text-xl leading-none">X</button>
+      </div>
+
+      <form id="workerform" class="space-y-3 text-sm">
+         <div>
+          <label class="block mb-1 text-xs">Nom</label>
+          <input type="text" id="name" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Rôle</label>
+          <select id="role" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+            <option >Réceptionniste</option>
+            <option >Technicien IT</option>
+            <option >Agent de sécurité</option>
+            <option >Manager</option>
+            <option>Nettoyage</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+         <div class="grid grid-cols-2 gap-2 items-start">
+          <div>
+            <label class="block mb-1 text-xs">Photo (URL)</label>
+            <input type="text" id="photourl" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+          </div>
+          <div class="flex flex-col items-center">
+            <span class="block mb-1 text-xs">Prévisualisation</span>
+            <img id="photopreview" src="" alt="Preview"
+                 class="w-20 h-20 border border-gray-300 object-cover bg-gray-100">
+          </div>
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Email</label>
+          <input type="email" id="email" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <label class="block mb-1 text-xs">Téléphone</label>
+          <input type="tel" id="phone" class="w-full border border-gray-300 px-2 py-1 text-xs outline-none">
+        </div>
+
+         <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs">Expériences professionnelles</label>
+            <button type="button" id="addexperience"
+                    class="border border-gray-400 px-2 py-[2px] text-[11px]">
+              + Ajouter
+            </button>
+          </div>
+
+           <div id="experiences" class="space-y-2 text-xs">
+  <div class="border border-gray-300 p-2">
+    <label class="block mb-1 text-xs">Poste</label>
+    <input type="text" placeholder="Poste"
+           class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+
+     
+    <label id="datedebut" class= "block mb-1 text-xs">Date début</label>
+    <input type="date"
+           class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+
+    <label id="datefin" class="block mb-1 text-xs">Date fin</label>
+    <input type="date"
+           class="w-full border border-gray-300 px-1 py-[2px] mb-1 text-[11px]">
+
+    <label class="block mb-1 text-xs">Description</label>
+    <input placeholder="Description"
+              class="w-full border border-gray-300 px-1 py-[2px] text-[11px]"> 
+  </div>
+</div>
+
+         <div class="flex justify-end space-x-2 mt-4 text-xs">
+          <button type="button" id="cancelform"
+                  class="border border-gray-400 px-3 py-1">
+            Annuler
+          </button>
+          <button type="submit"
+                  class="bg-green-600 text-white px-3 py-1">
+            Sauvegarder
+          </button>
+        </div>
+      </form>
+
     </div>
+  </div>
+   
+
+
 
 <script src="index.js"></script>
 </body>
 </html>
+ 
