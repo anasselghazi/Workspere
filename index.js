@@ -1,5 +1,4 @@
-     
-    
+      
 const modal = document.getElementById("modal-employer");
 const openBtnModal = document.getElementById("open-modal");
 const closeBtnModal = document.getElementById("close-modal");
@@ -41,6 +40,68 @@ const zones = {
     }
 };
 
+//OUVERTURE MODAL EMPLOYER................
+openBtnModal.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+});
+
+//FERMETURE MODAL EMPLOYER ....................;
+
+closeBtnModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    formEmployer.reset();
+});
+
+
+
+//BOUTTON DAJOUT DE EXP....................
+
+const addExp = document.getElementById("add-exp");
+
+addExp.addEventListener("click", () => {
+
+    const expDiv = document.createElement("div");
+    expDiv.className = " exp-item mt-2 border p-3 rounded-lg flex flex-col gap-2 "
+
+    const inputPost = document.createElement("input");
+    inputPost.type = "text";
+    inputPost.placeholder = "Poste";
+    inputPost.className = "border p-2 rounded-lg";
+    expDiv.appendChild(inputPost);
+
+    const inputEntreprise = document.createElement("input");
+    inputEntreprise.type = "text";
+    inputEntreprise.placeholder = "Entreprise";
+    inputEntreprise.className = "border p-2 rounded-lg";
+    expDiv.appendChild(inputEntreprise);
+
+    const inputPeriode = document.createElement("input");
+    inputPeriode.type = "text";
+    inputPeriode.placeholder = "Periode (2022-2023)";
+    inputPeriode.className = "border p-2 rounded-lg";
+    expDiv.appendChild(inputPeriode);
+
+    const inputDescription = document.createElement("textarea");
+    inputDescription.type = "text";
+    inputDescription.placeholder = "Description";
+    inputDescription.className = "border p-2 rounded-lg";
+    expDiv.appendChild(inputDescription);
+
+    const btnDeleteExp = document.createElement("button");
+    btnDeleteExp.className = "text-red-500 self-end";
+    expDiv.appendChild(btnDeleteExp);
+
+    const iconTrash = document.createElement("i");
+    iconTrash.className = "cursor-pointer fa-solid fa-trash";
+    btnDeleteExp.appendChild(iconTrash);
+
+
+    btnDeleteExp.addEventListener("click", () => {
+        expDiv.remove();
+    });
+    expContainer.appendChild(expDiv);
+
+});
 
 
     
