@@ -1,13 +1,71 @@
-    const formOverlay   = document.getElementById('formOverlay');
-    const openformbtn   = document.getElementById('openform');
-    const closeformbtn  = document.getElementById('closeform');
-    const cancelformbtn = document.getElementById('cancelform');
-    const workerform    = document.getElementById('workerform');
-    const photourlinput = document.getElementById('photourl');
-    const photopreview  = document.getElementById('photopreview');
-    const addexpbtn     = document.getElementById('addexperience');
-    const expcontainer  = document.getElementById('experiences');
-    let employees = [];
+     
+    
+const modal = document.getElementById("modal-employer");
+const openBtnModal = document.getElementById("open-modal");
+const closeBtnModal = document.getElementById("close-modal");
+const expContainer = document.getElementById("exp-container");
+const addExpBtn = document.getElementById("add-exp");
+
+const employees = [];
+
+const zones = {
+    reception: {
+        roles: ["Réceptionniste", "Manager", "Nettoyage"],
+        max: 2,
+        employees: []
+    },
+    serveurs: {
+        roles: ["Technicien IT", "Manager"],
+        max: 2,
+        employees: []
+    },
+    securite: {
+        roles: ["Agent de sécurité", "Manager"],
+        max: 3,
+        employees: []
+    },
+    personnel: {
+        roles: ["*"], // kolchi peut entrer
+        max: 5,
+        employees: []
+    },
+    conference: {
+        roles: ["*"], //  kolchi peut entrer
+        max: 10,
+        employees: []
+    },
+    archives: {
+        roles: ["Manager", "Réceptionniste", "Technicien IT", "Agent de sécurité"],
+        max: 2,
+        employees: []
+    }
+};
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     function openform() {
       formOverlay.classList.remove('hidden');
     }
